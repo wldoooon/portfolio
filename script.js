@@ -1,48 +1,37 @@
-// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle loading screen
     const loadingScreen = document.querySelector('.loading-screen');
     
-    // Hide loading screen after 2 seconds
     setTimeout(function() {
         loadingScreen.classList.add('hidden');
         
-        // Enable scrolling on body after loading screen is hidden
         setTimeout(function() {
             loadingScreen.style.display = 'none';
             document.body.style.overflow = 'auto';
-        }, 500); // Match this with the transition time in CSS
+        }, 500); 
     }, 2000);
     
-    // Copy email functionality
     const copyEmailBtn = document.getElementById('copy-email');
     const emailDisplay = document.getElementById('email-display');
     const tooltip = document.querySelector('.tooltip');
     
     if (copyEmailBtn && emailDisplay) {
         copyEmailBtn.addEventListener('click', function() {
-            // Select the text
             emailDisplay.select();
-            emailDisplay.setSelectionRange(0, 99999); // For mobile devices
+            emailDisplay.setSelectionRange(0, 99999); 
             
-            // Copy the text to the clipboard
             document.execCommand('copy');
             
-            // Deselect the text
             window.getSelection().removeAllRanges();
             
-            // Show success message
             tooltip.textContent = 'Copied!';
             tooltip.classList.add('copied');
             tooltip.style.opacity = '1';
             tooltip.style.visibility = 'visible';
             
-            // Hide after 2 seconds
             setTimeout(() => {
                 tooltip.style.opacity = '0';
                 tooltip.style.visibility = 'hidden';
                 
-                // Reset after animation completes
                 setTimeout(() => {
                     tooltip.textContent = 'Copy';
                     tooltip.classList.remove('copied');
@@ -51,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('nav a');
     
     navLinks.forEach(link => {
@@ -72,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Navbar scroll effect
     const nav = document.querySelector('nav');
     
     window.addEventListener('scroll', function() {
@@ -87,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Scroll animation for elements
     const animateOnScroll = function() {
         const elements = document.querySelectorAll('.project-card, .blog-card, .about-card, .hero-left');
         
@@ -102,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Set initial state for animation
     const cards = document.querySelectorAll('.project-card, .blog-card');
     cards.forEach(card => {
         card.style.opacity = '0';
@@ -110,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     });
     
-    // Set initial state for hero elements
     const heroLeft = document.querySelector('.hero-left');
     const aboutCard = document.querySelector('.about-card');
     
@@ -131,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 700);
     }
     
-    // Show hero left content after a short delay
     setTimeout(() => {
         if (heroLeft) {
             heroLeft.style.opacity = '1';
@@ -139,36 +122,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 400);
     
-    // Run animation on scroll
     window.addEventListener('scroll', animateOnScroll);
-    // Run once on initial load
     animateOnScroll();
     
-    // Form submission
     const contactForm = document.querySelector('.contact-form');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Here you would normally send the data to a server
-            // For this example, we'll just log it to the console
             console.log('Form submitted:', { name, email, message });
             
-            // Show success message to user
             alert('Thank you for your message! I will get back to you soon.');
             
-            // Reset form
             contactForm.reset();
         });
     }
 
-    // Handle active class for navigation
     const sections = document.querySelectorAll('section[id]');
 
     function setActiveNavItem() {
@@ -190,13 +164,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Initial call to set the active nav item
     setActiveNavItem();
 
-    // Add scroll event to update active nav item
     window.addEventListener('scroll', setActiveNavItem);
 
-    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
